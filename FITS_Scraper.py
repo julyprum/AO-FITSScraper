@@ -21,11 +21,11 @@ if useMysql:
     
     try:
         conn = mariadb.connect(
-            user="catalog_admin",
-            password="naic305c",
-            host="aolcp",
+            user="YOUR_USER",
+            password="YOUR_PASS",
+            host="YOUR_HOST",
             port=3306,
-            database="data_catalog"
+            database="YOUR_DATABASE"
         )
         if truncateTbl:
             cursor = conn.cursor()
@@ -43,11 +43,11 @@ def mysql_inserts_vals(vals):
     if useMysql:
         try:
             conn = mariadb.connect(
-                user="catalog_admin",
-                password="naic305c",
-                host="aolcp",
+                user="YOUR_USER",
+                password="YOUR_PASS",
+                host="YOUR_HOST",
                 port=3306,
-                database="data_catalog"
+                database="YOUR_DATABASE"
             )
             sql = "INSERT INTO fits_catalog (Filename, Directory, Attribute, Value, Comments, Hdr0, Hdr1) VALUES (%s, %s, %s, %s, %s, %s, %s)"
             cursor = conn.cursor()
@@ -63,11 +63,11 @@ def mysql_inserts_sql(sql):
         print(sql)
         try:
             conn = mariadb.connect(
-                user="catalog_admin",
-                password="naic305c",
-                host="aolcp",
+                user="YOUR_USER",
+                password="YOUR_PASS",
+                host="YOUR_HOST",
                 port=3306,
-                database="data_catalog"
+                database="YOUR_DATABASE"
             )
             cursor = conn.cursor()
             cursor.execute(sql)
