@@ -4,16 +4,22 @@ import sys
 import pandas as pd
 from astropy.io.fits.verify import VerifyError
 
-rootdir = '/share/pdata2/pdev/'
-csvdir = '/share/jalvarad/FITSScraper/CSV/'
-tmpdir = '/share/jalvarad/FITSScraper/tmp/'
-scriptdir = '/share/jalvarad/FITSScraper/'
-fileList = scriptdir + 'pdata2/' + 'File2_2.txt'
+rootdir = '/xxx/xxx/xxx/'
+csvdir = '/xxx/xxx/xxx/xxx/'
+tmpdir = '/xxx/xxx/xxx/xxx/'
+scriptdir = '/xxx/xxx/xxx/'
+fileList = scriptdir + 'xxx/' + 'Files.txt'
 
 # Trigger to use Mysql Inserts
 useMysql = True
 truncateTbl = False
 truncateCSV = False
+
+dbuser="DBUSER",
+dbpassword="DBPASSWORD",
+dbhost="DBHOST",
+dbport=3306,
+dbdatabase="DATABASENAME"
 
 # If Mysql is enable, create connection
 if useMysql:
@@ -21,11 +27,11 @@ if useMysql:
     
     try:
         conn = mariadb.connect(
-            user="YOUR_USER",
-            password="YOUR_PASS",
-            host="YOUR_HOST",
-            port=3306,
-            database="YOUR_DATABASE"
+            user=dbuser,
+            password=dbpassword,
+            host=dbhost,
+            port=dbport,
+            database=dbdatabase
         )
         if truncateTbl:
             cursor = conn.cursor()
@@ -43,11 +49,11 @@ def mysql_inserts_vals(vals):
     if useMysql:
         try:
             conn = mariadb.connect(
-                user="YOUR_USER",
-                password="YOUR_PASS",
-                host="YOUR_HOST",
-                port=3306,
-                database="YOUR_DATABASE"
+                user=dbuser,
+                password=dbpassword,
+                host=dbhost,
+                port=dbport,
+                database=dbdatabase
             )
             sql = "INSERT INTO fits_catalog (Filename, Directory, Attribute, Value, Comments, Hdr0, Hdr1) VALUES (%s, %s, %s, %s, %s, %s, %s)"
             cursor = conn.cursor()
@@ -63,11 +69,11 @@ def mysql_inserts_sql(sql):
         print(sql)
         try:
             conn = mariadb.connect(
-                user="YOUR_USER",
-                password="YOUR_PASS",
-                host="YOUR_HOST",
+                user="catalog_admin",
+                password="naic305c",
+                host="aolcp",
                 port=3306,
-                database="YOUR_DATABASE"
+                database="data_catalog"
             )
             cursor = conn.cursor()
             cursor.execute(sql)
